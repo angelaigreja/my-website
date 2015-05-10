@@ -2,4 +2,6 @@
 *.css.map
 *.sass-cache/
 *.DS_Store
-css/main.css  #compiled version
+
+#compiled css
+*main.css
