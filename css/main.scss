@@ -355,8 +355,10 @@ body {
 .face {
     border-radius: 100%;
     overflow: hidden;
-    max-width: 13em;
+    max-width: 15em;
     width: 100%;
+    margin: 0 auto;
+    border: 7px solid #fff;
 }
 
 .contacts{
