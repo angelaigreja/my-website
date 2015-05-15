@@ -5,3 +5,5 @@
 
 #compiled css
 *main.css
+.tmp
+node_modules
