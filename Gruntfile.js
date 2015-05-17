@@ -15,17 +15,17 @@ module.exports = function (grunt) {
                 livereload: true
             },
             css: {
-                files: 'css/*.scss',
+                files: 'app/css/*.scss',
                 tasks: ['sass']
             },
             files: {
-                files: ['**/*.js', '**/*.html']
+                files: ['app/**/*.js', 'app/**/*.html']
             }
         },
         connect: {
             server: {
                 options: {
-                    port: 3000,
+                    port: 3010,
                     open: true,
                     livereload: 35729,
                     middleware: function (connect) {
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                                 '/bower_components',
                                 connect.static('./bower_components')
                             ),
-                            connect.static('.')
+                            connect.static('app')
                         ];
                     }
                 }
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    '.tmp/css/main.css': 'css/main.scss'
+                    '.tmp/css/main.css': 'app/css/main.scss'
                 }
             }
         }
