@@ -37,4 +37,19 @@
         $('.navbar-toggle:visible').click();
     });
 
+    $(function() {
+        for (var i = 0; i < 1; i++){
+            $('#proj0').bind('click', function(e) {
+                e.preventDefault();
+                $('#popup0').bPopup({
+                    modalClose: true,
+                    opacity: 0.6,
+                    positionStyle: 'fixed', //'fixed' or 'absolute'
+                    fadeSpeed: 'slow', //can be a string ('slow'/'fast') or int
+                    followSpeed: 1500 //can be a string ('slow'/'fast') or int
+                });
+            });
+        }
+    });
+
 })(); // End of use strict
