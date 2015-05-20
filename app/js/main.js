@@ -37,19 +37,23 @@
         $('.navbar-toggle:visible').click();
     });
 
-    $(function() {
-        for (var i = 0; i < 1; i++){
-            $('#proj0').bind('click', function(e) {
-                e.preventDefault();
-                $('#popup0').bPopup({
-                    modalClose: true,
-                    opacity: 0.6,
-                    positionStyle: 'fixed', //'fixed' or 'absolute'
-                    fadeSpeed: 'slow', //can be a string ('slow'/'fast') or int
-                    followSpeed: 1500 //can be a string ('slow'/'fast') or int
-                });
-            });
-        }
+    //Place dialog in the center of the screen
+    function reposition() {
+        var modal = $(this),
+            dialog = modal.find('.modal-dialog');
+        modal.css('display', 'block');
+
+        // Dividing by two centers the modal exactly, but dividing by three
+        // or four works better for larger screens.
+        dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+    }
+
+    // Reposition when a modal is shown
+    $('.modal').on('show.bs.modal', reposition);
+
+    // Reposition when the window is resized
+    $(window).on('resize', function() {
+        $('.modal:visible').each(reposition);
     });
 
 })(); // End of use strict

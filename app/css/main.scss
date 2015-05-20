@@ -187,13 +187,13 @@ header .header-content .header-content-inner h1 {
     margin-top: 0;
     margin-bottom: 0;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     color: $accent;
 }
 
 header .header-content .header-content-inner h2 {
     color: $accent;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 
@@ -265,6 +265,7 @@ header .header-content .header-content-inner p {
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
+    outline:none!important
 }
 
 .portfolio-box .portfolio-box-caption {
@@ -350,7 +351,35 @@ body {
     webkit-tap-highlight-color: #222;
 }
 
-//Contact
+/* Modals
+---------------------------------- */
+.modal-content {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.modal-header {
+    background-color: $accent;
+    color: #ffffff;
+}
+
+.modal-header .close {
+    font-weight: 300;
+    color: #FFFFFF;
+    text-shadow: none;
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.modal-body {
+    text-align: justify;
+    padding: 25px;
+}
+
+
+/*Contact
+---------------------------------- */
 .face {
     border-radius: 100%;
     overflow: hidden;
@@ -397,7 +426,8 @@ body {
 }
 
 
-//Footer
+/* Footer
+---------------------------------- */
 footer {
     color: #7d7d7d;
     background-color: $gray;
@@ -408,3 +438,7 @@ footer {
         font-weight: 300;
     }
 }
+
+
+
+
