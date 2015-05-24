@@ -1,6 +1,14 @@
 (function() {
     "use strict"; // Start of use strict
 
+    //Collect clicks in the page
+    $(document).click(function(loc){
+        var x = loc.pageX;
+        var y = loc.pageY;
+        console.log("x" +x);
+        console.log("y" +y);
+    });
+
     // Offset for Main Navigation
     $('#mainNav').affix({
         offset: {
