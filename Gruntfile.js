@@ -9,7 +9,11 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-
+        wiredep: {
+            app: {
+                src: ['app/index.html']
+            }
+        },
         watch: {
             options: {
                 livereload: true
@@ -22,8 +26,76 @@ module.exports = function (grunt) {
                 files: ['app/**/*.js', 'app/**/*.html']
             }
         },
+        // Reads HTML for usemin blocks to enable smart builds that automatically
+        // concat, minify and revision files. Creates configurations in memory so
+        // additional tasks can operate on them
+        useminPrepare: {
+            html: 'app/index.html',
+            options: {
+                dest: 'dist',
+                flow: {
+                    html: {
+                        steps: {
+                            js: ['concat', 'uglifyjs'],
+                            css: ['concat', 'cssmin']
+                        },
+                        post: {}
+                    }
+                }
+            }
+        },
+
+        // Performs rewrites based on filerev and the useminPrepare configuration
+        usemin: {
+            html: ['dist/index.html']
+        },
+
+
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'app/img',
+                    src: '{,*/}*.{png,jpg,jpeg,gif}',
+                    dest: 'dist/img'
+                }]
+            }
+        },
+        // Copies remaining files to places other tasks can use
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: 'app',
+                    dest: 'dist',
+                    src: [
+                        '*.{ico,pdf,webapp}',
+                        '**/*.html'
+                    ]
+                },{
+                    expand: true,
+                    dot: true,
+                    cwd: 'bower_components/components-font-awesome',
+                    dest: 'dist',
+                    src: [
+                        'fonts/*'
+                    ]
+                },{
+                    expand: true,
+                    dot: true,
+                    dest: 'dist',
+                    src: [
+                        'README.md',
+                        'CNAME',
+                        'robots.txt',
+                        'LICENSE'
+                    ]
+                }]
+            }
+        },
         connect: {
-            server: {
+            dev: {
                 options: {
                     port: 3010,
                     open: true,
@@ -39,6 +111,23 @@ module.exports = function (grunt) {
                         ];
                     }
                 }
+            },
+            dist: {
+                options: {
+                    port: 3015,
+                    open: true,
+                    keepalive: true,
+                    middleware: function (connect) {
+                        return [
+                            connect.static('dist')
+                        ];
+                    }
+                }
+            }
+        },
+        clean: {
+            dist: {
+                src: ['dist', '.tmp']
             }
         },
 
@@ -56,6 +145,20 @@ module.exports = function (grunt) {
 
 
     // Default task(s).
-    grunt.registerTask('default', ['sass', 'connect', 'watch']);
+    grunt.registerTask('default', ['wiredep', 'sass', 'connect:dev', 'watch']);
+
+    // simple build task
+    grunt.registerTask('build', [
+        'clean:dist',
+        'wiredep',
+        'sass',
+        'imagemin',
+        'copy',
+        'useminPrepare',
+        'concat:generated',
+        'cssmin:generated',
+        'uglify:generated',
+        'usemin'
+    ]);
 
 };
