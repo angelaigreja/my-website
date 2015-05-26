@@ -73,7 +73,7 @@ module.exports = function (grunt) {
                         '*.{ico,pdf,webapp}',
                         '**/*.html'
                     ]
-                },{
+                }, {
                     expand: true,
                     dot: true,
                     cwd: 'bower_components/components-font-awesome',
@@ -81,7 +81,7 @@ module.exports = function (grunt) {
                     src: [
                         'fonts/*'
                     ]
-                },{
+                }, {
                     expand: true,
                     dot: true,
                     dest: 'dist',
@@ -92,6 +92,17 @@ module.exports = function (grunt) {
                         'LICENSE'
                     ]
                 }]
+            }
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'dist/index.html': 'dist/index.html'
+                }
             }
         },
         connect: {
@@ -158,7 +169,8 @@ module.exports = function (grunt) {
         'concat:generated',
         'cssmin:generated',
         'uglify:generated',
-        'usemin'
+        'usemin',
+        'htmlmin:dist'
     ]);
 
 };
